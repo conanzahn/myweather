@@ -25,9 +25,9 @@ const Search = ()=> (
         <Searchbar>
             <Searchform />
         </Searchbar>
-        <Searchbtn>
+        {/* <Searchbtn>
             <Button size='small' variant='search' type='submit'> Search </Button>
-        </Searchbtn>
+        </Searchbtn> */}
     </Serachbox>
 )
 export default Search; 

@@ -1,7 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import {BiSearchAlt} from 'react-icons/bi';
+import Button from '../button';
+import { render } from '@testing-library/react';
 // import axios from 'axios';
+
+const Box = styled.div`
+    display: flex;
+`;
 
 const Inputbox = styled.div`
     /* border: 2px solid #DDD; */
@@ -30,16 +36,53 @@ const Input = styled.input`
     }
 `;
 
-const Searchform = ()=> (
-    <form>
-        {/* <label for="city">Please input a city</label> */}
-        <Inputbox>
-            <Inputimg>
-                <BiSearchAlt size='25px' />
-            </Inputimg>
-            <Input type="text" id="city" name="city" placeholder="Sydney"/>
-        </Inputbox>
-    </form>
-)
+const Searchbtn = styled.div`
+    margin-left: 8%;
+    margin-top: 1%;
+`;
+
+class Searchform extends React.Component {
+    constructor (props) {
+        super (props);
+
+        this.state = {
+            search:'',
+            isSubmit:''
+        };
+        
+        this.handleSearchChange = this.handleSearchChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSearchChange=(event)=> {
+        this.setState({search: event.target.value});
+    }
+
+    handleSubmit (event){
+        event.preventDefault();
+        this.setState({isSubmit:true})
+    }
+
+    render(){
+        return(
+            <Box>
+                <form onSubmit={this.handleSubmit}>
+                    {/* <label for="city">Please input a city</label> */}
+                    <Inputbox>
+                        <Inputimg>
+                            <BiSearchAlt size='25px' />
+                        </Inputimg>
+                        <Input type="text" id="city" name="city" placeholder="Sydney"
+                        onChange={this.handleSearchChange}/>
+                    </Inputbox>
+                </form>
+                <Searchbtn>
+                    <Button size='small' variant='search' type='submit'> Search </Button>
+                </Searchbtn>
+            </Box>
+        );
+    }
+    
+}
 
 export default Searchform; 

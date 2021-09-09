@@ -1,2 +1,4 @@
 change open weather icon to react weather icon
-add forecast
+add forecast 
+
+deal with search

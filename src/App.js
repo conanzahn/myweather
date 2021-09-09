@@ -3,6 +3,8 @@ import React from "react";
 import Search from './components/search';
 import Header from './components/header';
 import Weather from './components/weather';
+import Footer from './components/Footer';
+import Forecast from './components/forecast';
 
 
 export default function App() {
@@ -25,6 +27,8 @@ export default function App() {
       <Header />
       <Search />
       <Weather />
+      
+      <Footer />
     </div>
   );
 }

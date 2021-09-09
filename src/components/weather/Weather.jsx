@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { IoMdSunny } from "react-icons/io";
 import ReactAnimatedWeather from 'react-animated-weather';
+import Forecast from '../forecast';
 
 const Container = styled.div`
     border: none;
@@ -13,12 +14,12 @@ const Container = styled.div`
 
 const Citybox = styled.div`
     border: none;
-    border-radius:15px;
-    background: #A0C1B8;
-    opacity: 0.6;
+    /* border-radius:15px; */
+    /* background: #A0C1B8; */
+    /* opacity: 0.6; */
     color: white;
     width: 260px;
-    padding: 5px 5px 5px;
+    padding: 0 5px 0;
     letter-spacing: .25em;
     text-transform: uppercase;
 `;
@@ -26,14 +27,14 @@ const Citybox = styled.div`
 const City = styled.div`
     display: flex;
     padding: 0 15px 0;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
 `;
 
 const Date = styled.div`
     display: flex;
     padding: 0 15px 0;
-    font-size: 12px;
+    font-size: 11px;
 `;
 
 const Weatherbox = styled.div`
@@ -75,21 +76,17 @@ const Descrip = styled.div`
 
 const Detailbox = styled.div`
     /* display: flex; */
-    margin-left: 15%;
+    margin-left: 18%;
     margin-top: 2%; 
     border-radius:15px;
     background: white;
     opacity: 0.5;
     color: #353434;
-    width: 350px;
+    width: 360px;
     padding: 10px 5px 10px;
 `;
 
-const Row1 = styled.div`
-    display: flex;
-`;
-
-const Row2 = styled.div`
+const Row = styled.div`
     display: flex;
 `;
 
@@ -99,7 +96,7 @@ const Infobox = styled.div`
 `;
 
 const Data = styled.div`
-
+    font-weight: bold;
 `;
 
 const Label = styled.div`
@@ -118,10 +115,10 @@ class Weather extends React.Component{
 
     componentDidMount(){
         // const {search} = this.props;
-        axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${'perth'}&appid=${'06097b28b073d46a2f450fe6f7112b58'}&units=${'metric'}`).then(
-            response => {
+        axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${'sydney'}&appid=${'06097b28b073d46a2f450fe6f7112b58'}&units=${'metric'}`).then(
+        response => {
                 console.log('response',response)
-                const {clouds, main, name, sys, weather, wind} = response.data;
+                const {clouds, coord, dt, main, name, sys, weather, wind} = response.data;
                 if(response.data.status === 404){
                     this.setState({noResult:true})
                 }else {
@@ -140,6 +137,9 @@ class Weather extends React.Component{
                         sunset: sys.sunset,
                         describe: weather[0].description,
                         icon: weather[0].icon,
+                        lon: coord.lon,
+                        lat: coord.lat,
+                        date: dt,
                     });
                 }
                 },
@@ -162,13 +162,13 @@ class Weather extends React.Component{
         // const {search} = this.props.match.params;
         // console.log('result', searchResults);
         // console.log('noresult', noResult);
-        const {cityname, country, temp, high, low, wind, humidity, sunrise, sunset, describe, icon} = this.state;
+        const {cityname, lat, lon, date, country, temp, high, low, wind, humidity, sunrise, sunset, describe, icon} = this.state;
         
         return (
             <Container>
                 <Citybox>
                     <City>{cityname}, {country}</City>
-                    <Date>8 sep 2021</Date>
+                    <Date>{new window.Date(date*1000).toLocaleString()}</Date>
                 </Citybox>
 
                 <Weatherbox>
@@ -184,41 +184,41 @@ class Weather extends React.Component{
                     </Tempbox>
 
                     <Detailbox>
-                        <Row1>
+                        <Row>
                             <Infobox>
                                 <Data>{Math.floor(high)}&#8451;</Data>
                                 <Label>High</Label>
                             </Infobox>
                             <Infobox>
+                                <Data>
+                                    {/* {this.Timestr(sunrise)} */}
+                                    {new window.Date(sunrise*1000).toLocaleTimeString()}
+                                </Data>
+                                <Label>Sunrise</Label>
+                            </Infobox>
+                            <Infobox>
                                 <Data>{wind}Km/h</Data>
                                 <Label>Wind</Label>
                             </Infobox>
-                            <Infobox>
-                                <Data>
-                                    {/* {this.Timestr(sunrise)} */}
-                                    {new window.Date(sunrise).toLocaleTimeString()}
-                                </Data>
-                                
-                                <Label>Sunrise</Label>
-                            </Infobox>
-                        </Row1>
-                        <Row2>
+                        </Row>
+                        <Row>
                             <Infobox>
                                 <Data>{Math.floor(low)}&#8451;</Data>
                                 <Label>Low</Label>
                             </Infobox>
                             <Infobox>
+                                <Data>
+                                {new window.Date(sunset*1000).toLocaleTimeString()}</Data>
+                                <Label>Sunset</Label>
+                            </Infobox>
+                            <Infobox>
                                 <Data>{humidity}%</Data>
                                 <Label>Humidity</Label>
                             </Infobox>
-                            <Infobox>
-                                <Data>
-                                {new window.Date(sunset).toLocaleTimeString()}</Data>
-                                <Label>Sunset</Label>
-                            </Infobox>
-                        </Row2>
+                        </Row>
                     </Detailbox>
                 </Weatherbox>
+                <Forecast fore_lat={lat} fore_lon={lon}/>
             </Container>
         )
     }
