@@ -4,6 +4,9 @@ import {TiWeatherWindyCloudy} from 'react-icons/ti';
 
 const Container = styled.div`
     margin-top: 3%;
+    /* display:flex;
+    flex-direction: column;
+    align-items: center; */
 `;
 
 const Appicon = styled.div`

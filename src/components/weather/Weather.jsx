@@ -4,12 +4,13 @@ import axios from 'axios';
 import { IoMdSunny } from "react-icons/io";
 import ReactAnimatedWeather from 'react-animated-weather';
 import Forecast from '../forecast';
+import Search from '../search';
 
 const Container = styled.div`
     border: none;
     width: 100%;
     margin-top: 5%;
-    margin-left: 5%;
+    /* margin-left: 5%; */
 `;
 
 const Citybox = styled.div`
@@ -22,6 +23,7 @@ const Citybox = styled.div`
     padding: 0 5px 0;
     letter-spacing: .25em;
     text-transform: uppercase;
+    margin-left: 5%;
 `;
 
 const City = styled.div`
@@ -40,6 +42,7 @@ const Date = styled.div`
 const Weatherbox = styled.div`
     border: none;
     display: flex;
+    justify-content:center;
 `;
 
 const Tempbox = styled.div`
@@ -76,7 +79,7 @@ const Descrip = styled.div`
 
 const Detailbox = styled.div`
     /* display: flex; */
-    margin-left: 18%;
+    margin-left: 15%;
     margin-top: 2%; 
     border-radius:15px;
     background: white;
@@ -104,121 +107,72 @@ const Label = styled.div`
 `;
 
 class Weather extends React.Component{
-    constructor (props) {
-        super (props);
-
-        this.state = {
-            searchResults:'',
-            noResult:'',
-        };
-    }
-
-    componentDidMount(){
-        // const {search} = this.props;
-        axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${'sydney'}&appid=${'06097b28b073d46a2f450fe6f7112b58'}&units=${'metric'}`).then(
-        response => {
-                console.log('response',response)
-                const {clouds, coord, dt, main, name, sys, weather, wind} = response.data;
-                if(response.data.status === 404){
-                    this.setState({noResult:true})
-                }else {
-                    this.setState({noResult:false});
-
-                    this.setState({
-                        // searchResults:response.data
-                        cityname:name,
-                        country:sys.country,
-                        temp:main.temp,
-                        high:main.temp_max,
-                        low:main.temp_min,
-                        wind: wind.speed,
-                        humidity: main.humidity,
-                        sunrise: sys.sunrise,
-                        sunset: sys.sunset,
-                        describe: weather[0].description,
-                        icon: weather[0].icon,
-                        lon: coord.lon,
-                        lat: coord.lat,
-                        date: dt,
-                    });
-                }
-                },
-
-        ).catch(error=>{
-            console.log('error',error.data);
-            this.setState({error:true})
-        })
-    }
-
-    // Timestr = (time) =>{
-    //     var timestr = new window.Date(time).toLocaleTimeString()
-    //     return timestr
-    // }
-        
-    
 
     render() {
-        // const {searchResults, noResult} = this.state;
-        // const {search} = this.props.match.params;
-        // console.log('result', searchResults);
-        // console.log('noresult', noResult);
-        const {cityname, lat, lon, date, country, temp, high, low, wind, humidity, sunrise, sunset, describe, icon} = this.state;
         
+        const {result, isFirst,isLoading, err} = this.props
+        const {clouds, coord, dt, main, name, sys, weather, wind} = result
+        console.log('render=====', this.props.result)
         return (
             <Container>
+            {
+                isFirst ? <h2>欢迎使用，输入关键字，随后点击搜索</h2> :
+                isLoading ? <h2>Loading......</h2> :
+                err ? <h2 style={{color:'red'}}>{err}</h2> :
+                <>
                 <Citybox>
-                    <City>{cityname}, {country}</City>
-                    <Date>{new window.Date(date*1000).toLocaleString()}</Date>
+                    <City>{name}, {sys.country}</City>
+                    <Date>{new window.Date(dt*1000).toLocaleString()}</Date>
                 </Citybox>
 
                 <Weatherbox>
                     <Tempbox>
                         <Icon>
                             <IoMdSunny size='50px'/>
-                            {/* <img src={`http://openweathermap.org/img/w/${icon}.png`} /> */}
                         </Icon>
                         <Temp>
-                            <Degree>{Math.floor(temp)} &#8451;</Degree>
-                            <Descrip>{describe}</Descrip>
+                            <Degree>{Math.floor(main.temp)} &#8451;</Degree>
+                            <Descrip>{weather[0].description}</Descrip>
                         </Temp>
                     </Tempbox>
 
                     <Detailbox>
                         <Row>
                             <Infobox>
-                                <Data>{Math.floor(high)}&#8451;</Data>
+                                <Data>{Math.floor(main.temp_max)}&#8451;</Data>
                                 <Label>High</Label>
                             </Infobox>
                             <Infobox>
                                 <Data>
-                                    {/* {this.Timestr(sunrise)} */}
-                                    {new window.Date(sunrise*1000).toLocaleTimeString()}
+                                    {new window.Date(sys.sunrise*1000).toLocaleTimeString()}
                                 </Data>
                                 <Label>Sunrise</Label>
                             </Infobox>
                             <Infobox>
-                                <Data>{wind}Km/h</Data>
+                                <Data>{wind.speed}Km/h</Data>
                                 <Label>Wind</Label>
                             </Infobox>
                         </Row>
                         <Row>
                             <Infobox>
-                                <Data>{Math.floor(low)}&#8451;</Data>
+                                <Data>{Math.floor(main.temp_min)}&#8451;</Data>
                                 <Label>Low</Label>
                             </Infobox>
                             <Infobox>
                                 <Data>
-                                {new window.Date(sunset*1000).toLocaleTimeString()}</Data>
+                                {new window.Date(sys.sunset*1000).toLocaleTimeString()}</Data>
                                 <Label>Sunset</Label>
                             </Infobox>
                             <Infobox>
-                                <Data>{humidity}%</Data>
+                                <Data>{main.humidity}%</Data>
                                 <Label>Humidity</Label>
                             </Infobox>
                         </Row>
                     </Detailbox>
                 </Weatherbox>
-                <Forecast fore_lat={lat} fore_lon={lon}/>
+                <Forecast fore_lat={coord.lat} fore_lon={coord.lon}/>
+                </>
+            }
             </Container>
         )
     }

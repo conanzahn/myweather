@@ -21,6 +21,15 @@ const Title = styled.div`
     font-size:16px;
     font-weight:bolder;
     color: white;
+    margin-left: 5%;
+`;
+
+const Detail = styled.div`
+    display:flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    margin-left: 1%;
+
 `;
 
 const Itembox = styled.div`
@@ -93,50 +102,52 @@ class Forecast extends React.Component{
                     4 Days Forecast
                 </Title>
 
-                <Itembox>
-                    <Date>
-                    {new window.Date(day0*1000).toDateString().substr(4,6)}
-                    </Date>
-                    <Icon>
-                        <IoMdSunny />
-                    </Icon>
-                    <Temp>
-                    {Math.floor(day0temp)} &#8451;
-                    </Temp>
-                </Itembox>
-                <Itembox>
-                    <Date>
-                    {new window.Date(day1*1000).toDateString().substr(4,6)}
-                    </Date>
-                    <Icon>
-                        <IoMdSunny />
-                    </Icon>
-                    <Temp>
-                    {Math.floor(day1temp)} &#8451;
-                    </Temp>
-                </Itembox>
-                <Itembox>
-                    <Date>
-                    {new window.Date(day2*1000).toDateString().substr(4,6)}
-                    </Date>
-                    <Icon>
-                        <IoMdSunny />
-                    </Icon>
-                    <Temp>
-                    {Math.floor(day2temp)} &#8451;
-                    </Temp>
-                </Itembox>
-                <Itembox>
-                    <Date>
-                    {new window.Date(day3*1000).toDateString().substr(4,6)}
-                    </Date>
-                    <Icon>
-                        <IoMdSunny />
-                    </Icon>
-                    <Temp>
-                    {Math.floor(day3temp)} &#8451;
-                    </Temp>
-                </Itembox>
+                <Detail>
+                    <Itembox>
+                        <Date>
+                        {new window.Date(day0*1000).toDateString().substr(4,6)}
+                        </Date>
+                        <Icon>
+                            <IoMdSunny />
+                        </Icon>
+                        <Temp>
+                        {Math.floor(day0temp)} &#8451;
+                        </Temp>
+                    </Itembox>
+                    <Itembox>
+                        <Date>
+                        {new window.Date(day1*1000).toDateString().substr(4,6)}
+                        </Date>
+                        <Icon>
+                            <IoMdSunny />
+                        </Icon>
+                        <Temp>
+                        {Math.floor(day1temp)} &#8451;
+                        </Temp>
+                    </Itembox>
+                    <Itembox>
+                        <Date>
+                        {new window.Date(day2*1000).toDateString().substr(4,6)}
+                        </Date>
+                        <Icon>
+                            <IoMdSunny />
+                        </Icon>
+                        <Temp>
+                        {Math.floor(day2temp)} &#8451;
+                        </Temp>
+                    </Itembox>
+                    <Itembox>
+                        <Date>
+                        {new window.Date(day3*1000).toDateString().substr(4,6)}
+                        </Date>
+                        <Icon>
+                            <IoMdSunny />
+                        </Icon>
+                        <Temp>
+                        {Math.floor(day3temp)} &#8451;
+                        </Temp>
+                    </Itembox>
+                </Detail>
             </Container>
         )
     }

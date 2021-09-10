@@ -1,12 +1,11 @@
-import './App.css';
 import React from "react";
-import Header from './components/header';
-import Search from './components/search';
-import Weather from './components/weather';
-import Footer from './components/Footer';
+import Header from '../components/header';
+import Search from '../components/search';
+import Weather from '../components/weather';
+import Footer from '../components/Footer';
 
 
-class App extends React.Component{
+class Homepage extends React.Component{
 
     state = {
         result:{},
@@ -20,8 +19,9 @@ class App extends React.Component{
     }
 
     render() {
+        console.log('homapage')
         return (
-            <div className='App'>
+            <div>
                 <Header />
                 <Search updateAppState={this.updateAppState}/>
                 <Weather {...this.state}/>
@@ -31,4 +31,4 @@ class App extends React.Component{
     }
 }
 
-export default App; 
+export default Homepage; 

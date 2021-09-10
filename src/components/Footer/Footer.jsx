@@ -45,7 +45,7 @@ const Cpright = styled.div`
 const coffee = <FontAwesomeIcon icon={faCoffee} color='#552c2cc5'/>
 const love = <FontAwesomeIcon icon={faHeart} color='red'/>
 
-const footer = () => (
+const Footer = () => (
     <Container>
         <Ibox>
             <Icons>
@@ -66,4 +66,4 @@ const footer = () => (
         
     </Container>
 )
-export default footer;
+export default Footer;
