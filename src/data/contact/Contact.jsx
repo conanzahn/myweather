@@ -8,7 +8,7 @@ import { FaTwitter } from "react-icons/fa";
 
 const Contact = [
     {
-        link: 'http://haonan.zhang.website.s3-website.us-east-2.amazonaws.com/',
+        link: 'https://haonan.zhang.website.s3-website.us-east-2.amazonaws.com/',
         label: 'Web',
         icon: <MdWeb />,
     },

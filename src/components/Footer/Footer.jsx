@@ -52,7 +52,7 @@ const Footer = () => (
             <Icons>
                 {Contact.map((s) => (
                     <Item key = {s.label}>
-                        <Href href= {s.label}>
+                        <Href href= {s.link}>
                             {s.icon}
                         </Href>
                     </Item>

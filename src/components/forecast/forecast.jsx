@@ -69,7 +69,7 @@ class Forecast extends React.Component{
     componentDidMount(){
         const {fore_lat, fore_lon} = this.props;
 
-        axios.get(`http://api.openweathermap.org/data/2.5/onecall?lat=${fore_lat}&lon=${fore_lon}&appid=${'06097b28b073d46a2f450fe6f7112b58'}&units=${'metric'}`).then(
+        axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${fore_lat}&lon=${fore_lon}&appid=${'06097b28b073d46a2f450fe6f7112b58'}&units=${'metric'}`).then(
         response => {
                 console.log('forecast-response',response)
                 const {daily} = response.data;
