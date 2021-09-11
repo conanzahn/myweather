@@ -39,7 +39,7 @@ const Itembox = styled.div`
     background: #4d4d4d;
     opacity: 0.65;
     color: #ffffff;
-    width: 180px;
+    width: 140px;
     margin-top: 2% ; 
     margin-right: 3%;
     padding: 10px 5px 10px;
