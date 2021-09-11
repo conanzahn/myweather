@@ -1,3 +1,4 @@
+// Header component includes Logo and Title
 import React from 'react';
 import styled from 'styled-components';
 import {TiWeatherWindyCloudy} from 'react-icons/ti';

@@ -1,3 +1,4 @@
+// comman button styles
 import styled, { css } from 'styled-components';
 
 const Button = styled.button`
@@ -41,10 +42,6 @@ const Button = styled.button`
         padding: 16px 18px;
         font-size: 18px;
         `,
-        wide: css`
-        padding: 8px 60px;
-        font-size: 16px;
-        `,
         // medium是default
     }[props.size || 'medium'];
 
@@ -69,17 +66,6 @@ const Button = styled.button`
         background-color: #437764;
         color: white;
         border-radius: 15px;
-        border: hidden;
-        }
-        `,
-        send: css`
-        border: hidden;
-        border-radius: 8px;
-        background-color: #699cbe;
-        color: white;
-        :hover {
-        background-color: #496681;
-        color: white;
         border: hidden;
         }
         `,

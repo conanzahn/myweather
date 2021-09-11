@@ -1,23 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
-import { IoMdSunny } from "react-icons/io";
 import ReactAnimatedWeather from 'react-animated-weather';
 import Forecast from '../forecast';
-import Search from '../search';
+import WeatherIcon from '../../data/weatherIcon/WeatherIcon';
+import First from '../Info/First';
+import Error from '../Info/Error';
+import Load from '../Info/Load';
 
 const Container = styled.div`
     border: none;
     width: 100%;
     margin-top: 5%;
-    /* margin-left: 5%; */
 `;
 
 const Citybox = styled.div`
     border: none;
-    /* border-radius:15px; */
-    /* background: #A0C1B8; */
-    /* opacity: 0.6; */
     color: white;
     width: 260px;
     padding: 0 5px 0;
@@ -78,7 +75,6 @@ const Descrip = styled.div`
 `;
 
 const Detailbox = styled.div`
-    /* display: flex; */
     margin-left: 15%;
     margin-top: 2%; 
     border-radius:15px;
@@ -94,7 +90,6 @@ const Row = styled.div`
 `;
 
 const Infobox = styled.div`
-    /* background:green; */
     margin: 2px 27px 2px;
 `;
 
@@ -111,14 +106,15 @@ class Weather extends React.Component{
     render() {
         
         const {result, isFirst,isLoading, err} = this.props
-        const {clouds, coord, dt, main, name, sys, weather, wind} = result
+        const {coord, dt, main, name, sys, weather, wind} = result
+
         console.log('render=====', this.props.result)
         return (
             <Container>
             {
-                isFirst ? <h2>欢迎使用，输入关键字，随后点击搜索</h2> :
-                isLoading ? <h2>Loading......</h2> :
-                err ? <h2 style={{color:'red'}}>{err}</h2> :
+                isFirst ? <First /> :
+                isLoading ? <Load /> :
+                err ? <Error /> :
                 <>
                 <Citybox>
                     <City>{name}, {sys.country}</City>
@@ -128,7 +124,11 @@ class Weather extends React.Component{
                 <Weatherbox>
                     <Tempbox>
                         <Icon>
-                            <IoMdSunny size='50px'/>
+                            <ReactAnimatedWeather
+                                icon={WeatherIcon(weather[0].main)}
+                                size={80}
+                                color={'black'}
+                            />
                         </Icon>
                         <Temp>
                             <Degree>{Math.floor(main.temp)} &#8451;</Degree>

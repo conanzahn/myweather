@@ -1,3 +1,4 @@
+// Footer contain contact icons and copyright
 import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -5,23 +6,23 @@ import { faCoffee, faHeart } from '@fortawesome/free-solid-svg-icons'
 import Contact from '../../data/contact/Contact';
 
 const Container = styled.div`
-    border-top: 1px solid hsla(0,0%,62.7%,.3);
-    margin:20px 10px 1px;
+    border-top: 1px solid hsla(0,0%,82.7%,.3);
+    margin:5% 5% 1%;
 `;
 
 const Ibox = styled.div`
-    background: #2b2b2b;
-    opacity:0.75;
+    background: #000000;
+    opacity:0.8;
     border-radius: 50% 20% / 10% 40%;
-    /* margin-top: 0.1px; */
+    margin-top: 1%;
+    padding: 10px 5px 10px;
 `;
 
-const Icons = styled.ul`
-    /* display: flex; */
+const Icons = styled.div`
     padding-top: 1%;
 `;
 
-const Item = styled.li`
+const Item = styled.div`
     display: inline;
     margin: 0 6px 0;
 `;
@@ -59,7 +60,7 @@ const Footer = () => (
             </Icons>
 
             <Cpright>
-                © Copyright 2021 | Made with {love} and {coffee} by Haonan Zhang.
+                &copy; Copyright 2021 | Made with {love} and {coffee} by Haonan Zhang.
             </Cpright>
         </Ibox>
 
