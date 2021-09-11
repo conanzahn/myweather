@@ -6,7 +6,9 @@ Hey! This is a weather App which provide current weather and forecast. I created
 
 ## Preview
 
-In the project directory, 
+![weather](https://user-images.githubusercontent.com/54277153/132952837-2c9f6a00-36a4-49b7-836b-9b7f220610a1.jpg)
+
+![weather-sydney](https://user-images.githubusercontent.com/54277153/132952842-4c2a750a-ec21-4960-9a46-623d77d24f88.jpg)
 
 
 
