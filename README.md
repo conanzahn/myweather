@@ -2,7 +2,7 @@
 
 Hey! This is a weather App which provide current weather and forecast. I created this App for fun and practice. It was built by [React App](https://github.com/facebook/create-react-app), and I use [OpenWeatherMap](https://openweathermap.org/) as open API to access weather data.
 
-[Deployed in gh-pages](https://conanzahn.github.io/myweather/)
+[Deployed in AWS S3](http://haonanweather.s3-website.us-east-2.amazonaws.com/)
 
 ## Preview
 
